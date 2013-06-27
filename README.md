@@ -1,10 +1,10 @@
 monte-carlo-pi-simulator
 ========================
 
-This small Javascript application illustrates the concept of Monte Carlo method.
+This small Javascript application illustrates the concept of Monte Carlo method used to calculate the value of Pi.
 http://ren0.github.io/monte-carlo-pi-simulator/
 
-It works with HTML5 canvas so makes sure you are using a compatible browser.
+It works with HTML5 canvas so make sure you are using a compatible browser.
 
 
 How it works
