@@ -1,124 +1,26 @@
 <!DOCTYPE HTML>
-<html>
+<html ng-app>
 <head>
-<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
-<meta content="utf-8" http-equiv="encoding">
-<style>
-body {
-  margin: 0px;
-	padding: 0px;
-}
-#canvas
-{
-  height: 100%;
-  width: 100%;
-}
-
-</style>
+	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+	<meta content="utf-8" http-equiv="encoding">
+	<script src="./PiEstimationModel.js"></script> 
+	<script src="./PiEstimationSimulation.js"></script> 
+	<script src="./js/angular.min.js"/></script>
+	<script src="./graph/chart.js"/></script>
 </head>
 <body>
-
-	
-	<div id="container">
-		<menu id="controls">
-			<button type="button" onclick="run(100);">100</button>
-			<button type="button" onclick="run(1000);">1000</button>
-			<button type="button" onclick="run(10000);">10000</button>
-			<button type="button" onclick="run(100000);">100000</button>
-		</menu>
-		<canvas id="canvas" width="1200" height="600"></canvas>
-	</div>
-	
-	<script>
-		var dataPoints = 1000;
-		window.onload = run(dataPoints);
+	<div ng-controller="PiEstimationModel">
+		<form ng-submit="addPoints()">
+			<input type="text" ng-model="nbPointsToAdd" size="10" value="100">
+			<input class="btn-primary" type="submit" value="add">
+		</form>		
+		<h1>Curent State :</h1>
+		Nb points inside <span style="color:blue">{{numberPointsInside}}</span>, total : <span style="color:red">{{numberPointsTotal}}</span><br>
+		pi = (totalInside / totalPoints) * 4<br>
+		pi = (<span style="color:blue">{{numberPointsInside}}</span> / <span style="color:red">{{numberPointsTotal}}</span>) * 4 = {{piEstimation}} (Estimation error : {{piError}}%)<br>
 		
-		function run(nbPoints) {
-			var startTime = new Date().getTime();
-			var canvas = document.getElementById('canvas');
-			var context = canvas.getContext('2d');
-			var width = canvas.width;
-			var height = canvas.height;
-			
-			var nbIn = 0;
-			var nbOut = 0;
-			
-			// clear canvas
-			context.save();
-			context.setTransform(1, 0, 0, 1, 0, 0);
-			context.clearRect(0, 0, canvas.width, canvas.height);
-			context.restore();
-					
-			// circle
-			var centerX = width / 2;
-			var centerY = height / 2;
-			var radius = (height) / 2;
-			var startAngle = 0;
-			var endAngle = 2 * Math.PI;
-			var counterClockwise = false;
-			context.beginPath();
-			context.arc(centerX, centerY, radius, startAngle, endAngle, counterClockwise);
-			context.lineWidth = 1;
-			context.strokeStyle = 'blue';
-			context.stroke();
-
-			// rectangle
-			context.beginPath();
-			context.rect(centerX - radius, 0, radius * 2, radius * 2);
-			context.lineWidth = 1;
-			context.strokeStyle = 'red';
-			context.stroke();
-
-			// points
-			context.beginPath();
-			for (i = 0; i < nbPoints; i++) {
-				var x = Math.random();
-				var y = Math.random();
-				var xPos = (centerX - radius) + 2 * radius * x;
-				var yPos = 2 * radius * y;
-				if (x * x + y * y <= 1) nbIn++; // the point is within the circle
-				context.fillRect(xPos, yPos, 1, 1);
-			}
-			nbOut = nbPoints - nbIn;
-			context.strokeStyle = 'black';
-			context.stroke();
-
-			// text
-			var piEstimate = (nbIn / nbPoints) * 4;
-			context.font = "bold 12px sans-serif";
-			context.fillText("Points: " + nbPoints, 150, 20);
-			context.fillText("Points in: " + nbIn, 150, 50);
-			context.fillText("Points out: " + nbOut, 150, 80);
-			context.fillText("Pi estimate: " + piEstimate, 150, 120);
-			//context.fillText(String.fromCharCode(parseInt('03C0', 16)), 150, 150);			
-			context.fillText("Time taken: " + (Date.now() - startTime) + " ms", 150, 180);			
-			
-			
-			// TODO use draw pixel instead
-			//var canvasData = context.getImageData(1, 1, canvasWidth, canvasHeight);
-			//var canvasData = context.getImageData(10,10,50,50);
-
-			// That's how you define the value of a pixel
-			//function drawPixel (x, y, r, g, b, a) {
-			//var index = (x + y * canvasWidth) * 4;
-
-			//canvasData.data[index + 0] = r;
-			//canvasData.data[index + 1] = g;
-			//canvasData.data[index + 2] = b;
-			//canvasData.data[index + 3] = a;
-			//}
-
-			// That's how you update the canvas, so that your //
-			// modification are taken in consideration //
-			//function updateCanvas() {
-			//			context.putImageData(canvasData, 0, 0);
-			//	}
-
-			//drawPixel(1, 1, 255, 0, 0, 255);
-			//drawPixel(1, 2, 255, 0, 0, 255);
-			//drawPixel(1, 3, 255, 0, 0, 255);
-			//updateCanvas();
-		}
-	</script>
+		<canvas id="myChart" width="600" height="400"></canvas>
+		<canvas id="canvas" width="600" height="600"></canvas>
+	</div>
 </body>
 </html>
