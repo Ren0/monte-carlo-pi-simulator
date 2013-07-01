@@ -6,6 +6,7 @@ http://ren0.github.io/monte-carlo-pi-simulator/
 
 It works with HTML5 canvas so make sure you are using a compatible browser.
 
+<img src="http://imgur.com/s3l13Sx" style="width: 25%; height: 25%; float: left;">
 
 How it works
 ========================
