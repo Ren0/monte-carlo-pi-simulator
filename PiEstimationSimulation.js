@@ -1,11 +1,12 @@
 function PiEstimationSimulation(){
 	var totalPoints = 0;
 	var totalInside = 0;
-	var keepTrackEvery = 50;
 	var trackedValue = [];
 	var result = [];
 	
 	this.addPoints = function(nbToAdd) {
+	
+		var keepTrackEvery = getTrackEvery(nbToAdd);		
 		 
 		var current = 0;
 		while(current < nbToAdd){			
@@ -47,5 +48,13 @@ function PiEstimationSimulation(){
 	
 	this.getAllTrackedValue = function(){
 		return trackedValue;
+	}
+	var getTrackEvery = function(nbToAdd) {
+		if(nbToAdd<200){
+			return 20;
+		}
+		else{
+			return Math.ceil(nbToAdd/20);
+		}
 	}
 }
