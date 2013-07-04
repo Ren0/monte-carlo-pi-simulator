@@ -1,0 +1,4 @@
+- draw graph: only draw new points instead of redraing evertything
+- use highcharts instead of chartjs
+- play button: automaticaly add x points every y seconds
+- second tab with buffon's needles simulation

@@ -8,6 +8,7 @@ It works with HTML5 canvas so make sure you are using a compatible browser.
 
 <img src="http://imgur.com/s3l13Sx">
 
+
 How it works
 ========================
 

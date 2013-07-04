@@ -7,6 +7,7 @@ function PiEstimationSimulation(){
 	this.addPoints = function(nbToAdd) {
 	
 		var keepTrackEvery = getTrackEvery(nbToAdd);		
+		//var keepTrackEvery = 10;		
 		 
 		var current = 0;
 		while(current < nbToAdd){			
@@ -14,7 +15,8 @@ function PiEstimationSimulation(){
 			var y = Math.random();
 			if (x * x + y * y <= 1) {totalInside++;}
 			totalPoints++;
-			if(totalPoints%keepTrackEvery == 5){
+			//console.log(totalPoints);
+			if(totalPoints%keepTrackEvery == 5 ){
 				trackedValue.push({	
 					key:totalPoints,
 					value: this.calculatePi()}

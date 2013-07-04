@@ -3,24 +3,42 @@ function PiEstimationModel($scope){
 	$scope.currentSimulation = new PiEstimationSimulation();
 	
 	$scope.addPoints = function() {
+		var startTime = new Date().getTime();
+		var stepTime = new Date().getTime();
+		$scope.resetTimes();
 		$scope.currentSimulation.addPoints($scope.nbPointsToAdd);
 		$scope.numberPointsTotal = $scope.currentSimulation.getNumberOfPoints();
 		$scope.numberPointsInside = $scope.currentSimulation.getNumberOfPointsInside();
 		$scope.piEstimation = $scope.currentSimulation.calculatePi();
 		$scope.piError = $scope.currentSimulation.calculatePiError();
-		$scope.drawChart();
+		$scope.calculateTime = Date.now() - stepTime;
+		stepTime = new Date().getTime();
 		$scope.drawResult();
+		$scope.drawPointsTime = Date.now() - stepTime;
+		stepTime = new Date().getTime();
+		$scope.drawChart();
+		$scope.drawChartTime = Date.now() - stepTime;
+		$scope.totalTime = Date.now() - startTime;
 	};
 	
 	$scope.reset = function() {
 		$scope.currentSimulation = new PiEstimationSimulation();
+		$scope.drawResult();
+		$scope.drawChart();
 	};	
 	
+	$scope.resetTimes = function() {
+		$scope.calculateTime = 0;
+		$scope.drawPointsTime = 0;
+		$scope.drawChartTime = 0;
+	};
 	
 	$scope.numberPointsTotal = 0;	
-	$scope.numberPointsInside = 0;	
+	$scope.numberPointsInside = 100;	
 	$scope.piEstimation = 0;	
 	$scope.piError = 0;
+	$scope.defaultValue = 100;
+	
 	
 	$scope.drawChart = function() {
 		var tv =$scope.currentSimulation.getAllTrackedValue();
@@ -37,7 +55,7 @@ function PiEstimationModel($scope){
 
 		
 		var data = {
-			labels : resultKey,//["January","February","March","April","May","June","July"],
+			labels : resultKey,
 			datasets : [
 				{
 					fillColor : "rgba(220,220,220,0)",
@@ -50,12 +68,13 @@ function PiEstimationModel($scope){
 					fillColor : "rgba(151,187,205,0)",
 					strokeColor : "rgba(151,187,205,1)",
 					pointColor : "rgba(151,187,205,1)",
-					pointStrokeColor : "#fff",
+					pointStrokeColor : "red",
 					data : resultRef
 				}
 			]
 		}
-		var myNewChart = new Chart(ctx).Line(data,null);		
+		
+		var myNewChart = new Chart(ctx).Line(data, {animation: false, scaleShowGridLines: false});		
 	}
 	
 	$scope.drawResult = function() {
@@ -102,16 +121,5 @@ function PiEstimationModel($scope){
 		}
 		context.strokeStyle = 'black';
 		context.stroke();
-		
-		// text
-		var piEstimate = $scope.currentSimulation.calculatePi();//(nbIn / nbPoints) * 4;
-		context.font = "bold 12px sans-serif";
-		/*context.fillText("Points: " + nbPoints, 150, 20);
-		context.fillText("Points in: " + nbIn, 150, 50);
-		context.fillText("Points out: " + nbOut, 150, 80);
-		context.fillText("Pi estimate: " + piEstimate, 150, 120);*/
-		//context.fillText(String.fromCharCode(parseInt('03C0', 16)), 150, 150);			
-		context.fillText("Time taken: " + (Date.now() - startTime) + " ms", 150, 180);		
-		context.fillText("estimation Pi: " + piEstimate, 150, 200);		
 	}
 }

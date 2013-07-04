@@ -3,24 +3,60 @@
 <head>
 	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
 	<meta content="utf-8" http-equiv="encoding">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="./css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<link href="./img/favicon.ico" rel="icon" type="image/x-icon" />
+	
 	<script src="./PiEstimationModel.js"></script> 
 	<script src="./PiEstimationSimulation.js"></script> 
 	<script src="./js/angular.min.js"/></script>
 	<script src="./graph/chart.js"/></script>
+	<script src="http://code.jquery.com/jquery.js"></script>
+	<script src="./js/bootstrap.min.js"></script>
+	
 </head>
 <body>
-	<div ng-controller="PiEstimationModel">
-		<form ng-submit="addPoints()">
-			<input type="text" ng-model="nbPointsToAdd" size="10" value="100">
-			<input class="btn-primary" type="submit" value="add">
-		</form>		
-		<h1>Curent State :</h1>
-		Nb points inside <span style="color:blue">{{numberPointsInside}}</span>, total : <span style="color:red">{{numberPointsTotal}}</span><br>
-		pi = (totalInside / totalPoints) * 4<br>
-		pi = (<span style="color:blue">{{numberPointsInside}}</span> / <span style="color:red">{{numberPointsTotal}}</span>) * 4 = {{piEstimation}} (Estimation error : {{piError}}%)<br>
-		
-		<canvas id="myChart" width="600" height="400"></canvas>
-		<canvas id="canvas" width="600" height="600"></canvas>
+	<br>
+	<div class="container-fluid">
+		<div ng-controller="PiEstimationModel">
+			<div class="row-fluid">
+				<div class="span6">
+					
+						<form ng-submit="addPoints()">
+							<input type="text" class="input-medium search-query" ng-model="nbPointsToAdd" size="10">
+							<input class="btn btn-info" type="submit" value="add">
+						</form>	
+						<form ng-submit="reset()">
+							<input class="btn btn-info" type="submit" value="reset">
+						</form>								
+						<h3>Curent State :</h3>
+						Nb points inside <span style="color:blue">{{numberPointsInside}}</span>, total : <span style="color:red">{{numberPointsTotal}}</span><br>
+						pi = (totalInside / totalPoints) * 4<br>
+						pi = (<span style="color:blue">{{numberPointsInside}}</span> / <span style="color:red">{{numberPointsTotal}}</span>) * 4 = {{piEstimation}} (Estimation error : {{piError}}%)<br>
+
+				</div>	
+				
+				<div class="span6">			
+						Time taken:&nbsp;&nbsp;{{totalTime}} ms <br>
+						&nbsp;&nbsp; Compute values:&nbsp;&nbsp;{{calculateTime}} ms <br>
+						&nbsp;&nbsp; Draw points:&nbsp;&nbsp;{{drawPointsTime}} ms<br>
+						&nbsp;&nbsp; Draw chart:&nbsp;&nbsp;{{drawChartTime}} ms<br>
+				</div>		
+			</div>
+		</div>
+	
+		<br>
+		<div class="row-fluid">
+			<div class="span6">
+				<canvas id="canvas" width="600" height="400">
+				</canvas>
+			</div>
+			<div class="span6">
+				<canvas id="myChart" width="600" height="400">
+				</canvas>
+			</div>
+		</div>
 	</div>
+	
 </body>
 </html>
