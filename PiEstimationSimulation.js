@@ -3,47 +3,56 @@ function PiEstimationSimulation(){
 	var totalInside = 0;
 	var trackedValue = [];
 	var result = [];
+	var pointsToAdd = [];
 	
 	this.addPoints = function(nbToAdd) {
-	
+		pointsToAdd = [];
+		
 		var keepTrackEvery = getTrackEvery(nbToAdd);		
-		//var keepTrackEvery = 10;		
+		//console.log(keepTrackEvery);
 		 
 		var current = 0;
-		while(current < nbToAdd){			
+		while(current < nbToAdd){
 			var x = Math.random();
 			var y = Math.random();
-			if (x * x + y * y <= 1) {totalInside++;}
+			if (x * x + y * y <= 1) {totalInside++;} // the point is within the circle
 			totalPoints++;
 			//console.log(totalPoints);
-			if(totalPoints%keepTrackEvery == 5 ){
+			if(totalPoints % keepTrackEvery == 0 ){
 				trackedValue.push({	
-					key:totalPoints,
+					key: totalPoints,
 					value: this.calculatePi()}
 				);
 			}			
 			result[result.length] = {"x":x,"y":y};
+			pointsToAdd[pointsToAdd.length] = {"x":x,"y":y};
 			current++;
 		}
 	}
 	
 	this.calculatePi = function(){
 		var piEstimate = (totalInside / totalPoints) * 4;
-		return piEstimate;
+		return piEstimate.toFixed(5);
 	}
+	
 	this.calculatePiError = function(){
-		var pi = 3.14159265359;
+		var pi = Math.PI;
 		var piEstimate = (totalInside / totalPoints) * 4;
-		return Math.abs(((pi-piEstimate)/pi)*100);
+		return (Math.abs(((pi-piEstimate)/pi) * 100)).toFixed(5);
 	}
 	
 	this.getAllPoints = function(){
 		return result;
 	}
 	
+	this.getPointsToAdd = function(){
+		return pointsToAdd;
+	}
+	
 	this.getNumberOfPoints = function(){
 		return totalPoints;
 	}
+	
 	this.getNumberOfPointsInside = function(){
 		return totalInside;
 	}
@@ -51,12 +60,16 @@ function PiEstimationSimulation(){
 	this.getAllTrackedValue = function(){
 		return trackedValue;
 	}
+	
+	this.getLabels = function(nbLabels){
+		var result = [];
+		for (i = 0; i < totalPoints; i++) {
+			if ( i % (totalPoints/nbLabels) == 0) result[result.length] = i;
+		}
+		return result;
+	}
+
 	var getTrackEvery = function(nbToAdd) {
-		if(nbToAdd<200){
-			return 20;
-		}
-		else{
-			return Math.ceil(nbToAdd/20);
-		}
+		return totalPoints + parseInt(nbToAdd) / 10;
 	}
 }
