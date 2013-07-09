@@ -1,0 +1,81 @@
+<div class="container-fluid">
+	<div ng-controller="DartBoardController">
+		<div class="row-fluid">
+			<div class="span4">
+					<form ng-submit="addPoints()" ng-init="nbPointsToAdd=100">
+						<input type="number" min="0" max="10000000" class="input-medium search-query" ng-model="nbPointsToAdd"/>
+						<br/><br/>
+						<input class="btn btn-info" type="submit" value="Throw {{nbPointsToAdd}} darts"/>
+					</form>	
+					<form ng-submit="reset()">
+						<input class="btn" type="submit" value="reset"/>
+					</form>								
+			</div>	
+			
+			<div class="span4">
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+						  <td>Points inside</td>
+						  <td><span style="color:blue">{{numberPointsInside}}</span></td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+						  <td>Total points</td>
+						  <td><span style="color:red">{{numberPointsTotal}}</span></td>
+						</tr>
+						<tr>
+						  <td>
+								Pi &#8776; (<span style="color:blue">{{numberPointsInside}}</span> / <span style="color:red">{{numberPointsTotal}}</span>) x 4</td>
+						  <td>{{piEstimation}}</td>
+						</tr>
+						<tr>
+						  <td>Estimation error</td>
+						  <td>{{piError}} %</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>	
+			
+			<div class="span3 offset1">			
+			<table class="table table-condensed">
+				<thead>
+					<tr>
+					  <th>Time taken</th>
+					  <th>{{totalTime}} ms</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+					  <td>Compute values</td>
+					  <td>{{calculateTime}} ms </td>
+					</tr>
+					<tr>
+					  <td>Draw points</td>
+					  <td>{{drawPointsTime}} ms</td>
+					</tr>
+					<tr>
+					  <td>Draw chart</td>
+					  <td>{{drawChartTime}} ms</td>
+					</tr>
+				</tbody>
+			</table>
+			
+			</div>		
+		</div>
+	</div>
+
+	<br/>
+	<div class="row-fluid">
+		<div class="span6">
+			<canvas id="dartBoard" width="600" height="400">
+				Your brower does not support HTML5
+			</canvas>
+		</div>
+		<div class="span6">
+			<canvas id="chart" width="600" height="400">
+			</canvas>
+		</div>
+	</div>
+</div>
