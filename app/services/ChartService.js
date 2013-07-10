@@ -1,3 +1,17 @@
+// Factory - Service - Provider
+// Are all similar: retrive data to share, and inject it into Controller at runtime 
+// For example:  .controller('MyController', function ($scope, sampleFactory) {...});
+// Data can be fetched from Ajax call - by injecting $http variable into the Factory
+//piEstimationModule.factory('PiFactory', function() {
+//	var points = [{x:'0.2', y:'0.6'}, {x:'0.4', y:'0.3'}];
+//	
+//	var factory = {};
+//	factory.getPoints = function() {
+//		return points;
+//	}
+//	
+//	return factory;
+//});
 piEstimationModule.service('chartService', function () {
 
 	var chartCanvas = document.getElementById("chart");	
@@ -8,10 +22,10 @@ piEstimationModule.service('chartService', function () {
 	
 	
 	this.drawChart = function(tv, labels) {
-		//console.log(width);
-		//console.log(height);
-	
-		var context = chartCanvas.getContext('2d');
+		
+		chartCanvas = document.getElementById("chart");	
+		context = chartCanvas.getContext('2d');
+		
 		var resultKey = [];
 		var resultValue = [];
 		var resultRef = [];

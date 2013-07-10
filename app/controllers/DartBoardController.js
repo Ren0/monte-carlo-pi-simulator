@@ -1,12 +1,14 @@
-function DartBoardController($scope, piEstimationService, dartBoardService) {
+// Create Controller
+// in AngularJS $scope is the ViewModel in the MVVM architecture
+// it is the glue between the view and the controller
+function DartBoardController($scope, piEstimationService, dartBoardService, chartService) {
 	
 	piEstimationService.reset();
 	dartBoardService.initDartBoard();
-	$scope.chartCanvas = document.getElementById("chart");	
 
 	$scope.reset = function() {
 		piEstimationService.reset();
-		$scope.drawChart();
+		chartService.drawChart(piEstimationService.getAllTrackedValue(), piEstimationService.getLabels(10));
 		dartBoardService.initDartBoard();
 		$scope.resetTimes(true);
 		$scope.resetComputations();
@@ -27,61 +29,33 @@ function DartBoardController($scope, piEstimationService, dartBoardService) {
 	};
 	
 	$scope.addPoints = function() {
-		var startTime = new Date().getTime();
-		var stepTime = new Date().getTime();
 		$scope.resetTimes(false);
+		
+		var startTime = new Date().getTime();
+		
+		var stepTime = new Date().getTime();
 		piEstimationService.calculateNewPoints($scope.nbPointsToAdd);
+		this.updateComputations();
+		$scope.calculateTime = Date.now() - stepTime;
+		
+		stepTime = new Date().getTime();
+		dartBoardService.drawNewPoints(piEstimationService.getPointsToAdd());
+		$scope.drawPointsTime = Date.now() - stepTime;
+		
+		stepTime = new Date().getTime();
+		chartService.drawChart(piEstimationService.getAllTrackedValue(), piEstimationService.getLabels(10));
+		$scope.drawChartTime = Date.now() - stepTime;
+		
+		$scope.totalTime = Date.now() - startTime;
+	};
+	
+	$scope.updateComputations = function() {
 		$scope.numberPointsTotal = piEstimationService.getNumberOfPoints();
 		$scope.numberPointsInside = piEstimationService.getNumberOfPointsInside();
 		$scope.piEstimation = piEstimationService.calculatePi();
 		$scope.piError = piEstimationService.calculatePiError();
-		$scope.calculateTime = Date.now() - stepTime;
-		stepTime = new Date().getTime();
-		dartBoardService.drawNewPoints(piEstimationService.getPointsToAdd());
-		$scope.drawPointsTime = Date.now() - stepTime;
-		stepTime = new Date().getTime();
-		$scope.drawChart();
-		$scope.drawChartTime = Date.now() - stepTime;
-		$scope.totalTime = Date.now() - startTime;
 	};
 
-	$scope.drawChart = function() {
-		var context = $scope.chartCanvas.getContext('2d');
-		var tv = piEstimationService.getAllTrackedValue();
-		var labels = piEstimationService.getLabels(10);
-		var resultKey = [];
-		var resultValue = [];
-		var resultRef = [];
-		for (i = 0; i < tv.length; i++) {
-			resultKey[i] = tv[i]['key'];
-			resultValue[i] = tv[i]['value'];
-			resultRef[i] = Math.PI;
-		}		
-
-		var data = {
-			labels : resultKey,
-			//labels : labels,
-			datasets : [
-				{
-					fillColor : "rgba(220,220,220,0)",
-					strokeColor : "rgba(220,220,220,1)",
-					pointColor : "rgba(220,220,220,1)",
-					pointStrokeColor : "blue",
-					data : resultValue
-				},
-				{
-					fillColor : "rgba(151,187,205,0)",
-					strokeColor : "rgba(151,187,205,1)",
-					pointColor : "rgba(151,187,205,1)",
-					pointStrokeColor : "red",
-					data : resultRef
-				}
-			]
-		}
-		
-		var myNewChart = new Chart(context).Line(data, {animation: false, scaleShowGridLines: false});		
-	}
-	
 	$scope.reset();
 	
 }

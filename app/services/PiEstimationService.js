@@ -75,6 +75,6 @@ piEstimationModule.service('piEstimationService', function () {
 	}
 
 	var getTrackEvery = function(nbToAdd) {
-		return totalPoints + parseInt(nbToAdd) / 10;
+		return (totalPoints + parseInt(nbToAdd)) / 10;
 	}
 });

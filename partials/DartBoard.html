@@ -3,7 +3,7 @@
 		<div class="row-fluid">
 			<div class="span4">
 					<form ng-submit="addPoints()" ng-init="nbPointsToAdd=100">
-						<input type="number" min="0" max="10000000" class="input-medium search-query" ng-model="nbPointsToAdd"/>
+						<input type="number" min="1" max="10000000" class="input-medium search-query" ng-model="nbPointsToAdd"/>
 						<br/><br/>
 						<input class="btn btn-info" type="submit" value="Throw {{nbPointsToAdd}} darts"/>
 					</form>	
