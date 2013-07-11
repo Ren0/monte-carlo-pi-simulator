@@ -5,7 +5,7 @@
 					<form ng-submit="addPoints()" ng-init="nbPointsToAdd=100">
 						<input type="number" min="1" max="10000000" class="input-medium search-query" ng-model="nbPointsToAdd"/>
 						<br/><br/>
-						<input class="btn btn-info" type="submit" value="Throw {{nbPointsToAdd}} darts"/>
+						<input class="btn btn-info" type="submit" value="Throw {{nbPointsToAdd | number}} darts"/>
 					</form>	
 					<form ng-submit="reset()">
 						<input class="btn" type="submit" value="reset"/>
@@ -17,22 +17,22 @@
 					<thead>
 						<tr>
 						  <td>Points inside</td>
-						  <td><span style="color:blue">{{numberPointsInside}}</span></td>
+						  <td><span style="color:blue">{{numberPointsInside | number}}</span></td>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
 						  <td>Total points</td>
-						  <td><span style="color:red">{{numberPointsTotal}}</span></td>
+						  <td><span style="color:red">{{numberPointsTotal | number}}</span></td>
 						</tr>
 						<tr>
 						  <td>
-								Pi &#8776; (<span style="color:blue">{{numberPointsInside}}</span> / <span style="color:red">{{numberPointsTotal}}</span>) x 4</td>
-						  <td>{{piEstimation}}</td>
+								Pi &#8776; (<span style="color:blue">{{numberPointsInside | number}}</span> / <span style="color:red">{{numberPointsTotal | number}}</span>) x 4</td>
+						  <td>{{piEstimation | number}}</td>
 						</tr>
 						<tr>
 						  <td>Estimation error</td>
-						  <td>{{piError}} %</td>
+						  <td>{{piError | number}} %</td>
 						</tr>
 					</tbody>
 				</table>
@@ -43,21 +43,21 @@
 				<thead>
 					<tr>
 					  <th>Time taken</th>
-					  <th>{{totalTime}} ms</th>
+					  <th>{{totalTime | number}} ms</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
 					  <td>Compute values</td>
-					  <td>{{calculateTime}} ms </td>
+					  <td>{{calculateTime | number}} ms </td>
 					</tr>
 					<tr>
 					  <td>Draw points</td>
-					  <td>{{drawPointsTime}} ms</td>
+					  <td>{{drawPointsTime | number}} ms</td>
 					</tr>
 					<tr>
 					  <td>Draw chart</td>
-					  <td>{{drawChartTime}} ms</td>
+					  <td>{{drawChartTime | number}} ms</td>
 					</tr>
 				</tbody>
 			</table>
