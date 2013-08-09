@@ -1,7 +1,6 @@
 // Create Module
 // [] is for dependency injection: the module could rely on other modules to retrieve data
-var piEstimationModule = angular.module('piEstimationModule', []);
-//'piEstimationModule.controllers'
+var piEstimationModule = angular.module('piEstimationModule', ['highchart.directive']);
 
 // Value
 piEstimationModule.value('version', {message:"0.9.1"});

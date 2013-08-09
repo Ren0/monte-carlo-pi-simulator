@@ -1,14 +1,15 @@
 // Create Controller
 // in AngularJS $scope is the ViewModel in the MVVM architecture
 // it is the glue between the view and the controller
-function DartBoardController($scope, piEstimationService, dartBoardService, chartService) {
+function DartBoardController($scope, $http, piEstimationService, dartBoardService, chartService) {
+
 	
 	piEstimationService.reset();
 	dartBoardService.initDartBoard();
 
 	$scope.reset = function() {
 		piEstimationService.reset();
-		chartService.drawChart(piEstimationService.getAllTrackedValue(), piEstimationService.getLabels(10));
+		chartService.drawChart($scope, piEstimationService.getAllTrackedValue(), piEstimationService.getLabels(10));
 		dartBoardService.initDartBoard();
 		$scope.resetTimes(true);
 		$scope.resetComputations();
@@ -37,14 +38,17 @@ function DartBoardController($scope, piEstimationService, dartBoardService, char
 		piEstimationService.calculateNewPoints($scope.nbPointsToAdd);
 		this.updateComputations();
 		$scope.calculateTime = Date.now() - stepTime;
+		$scope.totalTime += $scope.calculateTime;
 		
 		stepTime = new Date().getTime();
 		dartBoardService.drawNewPoints(piEstimationService.getPointsToAdd());
 		$scope.drawPointsTime = Date.now() - stepTime;
+		$scope.totalTime += $scope.drawPointsTime;
 		
-		stepTime = new Date().getTime();
-		chartService.drawChart(piEstimationService.getAllTrackedValue(), piEstimationService.getLabels(10));
-		$scope.drawChartTime = Date.now() - stepTime;
+		// now updated in the directive
+		//stepTime = new Date().getTime();
+		chartService.drawChart($scope,piEstimationService.getAllTrackedValue(), piEstimationService.getLabels(10));
+		//$scope.drawChartTime = Date.now() - stepTime;
 		
 		$scope.totalTime = Date.now() - startTime;
 	};

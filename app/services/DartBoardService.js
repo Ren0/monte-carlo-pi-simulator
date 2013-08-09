@@ -9,8 +9,7 @@ piEstimationModule.service('dartBoardService', function () {
 	var radius = (height) / 2;
 	
 	this.initDartBoard = function() {
-		console.log('initDartBoard');
-	
+
 		dartBoardCanvas = document.getElementById("dartBoard");	
 		context = dartBoardCanvas.getContext('2d');
 	

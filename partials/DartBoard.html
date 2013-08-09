@@ -8,7 +8,7 @@
 						<input class="btn btn-info" type="submit" value="Throw {{nbPointsToAdd | number}} darts"/>
 					</form>	
 					<form ng-submit="reset()">
-						<input class="btn" type="submit" value="reset"/>
+						<input class="btn" type="submit" value="Reset"/>
 					</form>								
 			</div>	
 			
@@ -40,12 +40,6 @@
 			
 			<div class="span3 offset1">			
 			<table class="table table-condensed">
-				<thead>
-					<tr>
-					  <th>Time taken</th>
-					  <th>{{totalTime | number}} ms</th>
-					</tr>
-				</thead>
 				<tbody>
 					<tr>
 					  <td>Compute values</td>
@@ -59,23 +53,30 @@
 					  <td>Draw chart</td>
 					  <td>{{drawChartTime | number}} ms</td>
 					</tr>
+					<tr>
+					  <td><b>Total</b></td>
+					  <td><b>{{totalTime | number}} ms</b></td>
+					</tr>
 				</tbody>
 			</table>
-			
 			</div>		
 		</div>
-	</div>
+	
 
-	<br/>
-	<div class="row-fluid">
-		<div class="span6">
-			<canvas id="dartBoard" width="600" height="400">
-				Your brower does not support HTML5
-			</canvas>
-		</div>
-		<div class="span6">
-			<canvas id="chart" width="600" height="400">
-			</canvas>
+		<br/>
+		<div class="row-fluid">
+			<div class="span6">
+				<canvas id="dartBoard" width="600" height="400">
+					Your brower does not support HTML5
+				</canvas>
+			</div>
+			<div class="span6">
+				<!--<canvas id="chart" width="600" height="400">
+				</canvas>-->
+				<chart value='chart' type="area" height="400">
+				</chart>
+				<!--<highchart id="chart" series="chart.series" title="chart.title" options="chart.options"></highchart>-->
+			</div>
 		</div>
 	</div>
 </div>
