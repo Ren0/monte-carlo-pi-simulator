@@ -1,4 +1,5 @@
 - [x] draw graph: only draw new points instead of redraing evertything
-- [ ] use highcharts instead of chartjs for better X axis labels 
+- [x] use highcharts instead of chartjs for better X axis labels 
 - [ ] add a play button: automaticaly add x points every y seconds + progress bar
-- [ ] second tab with buffon's needles simulation
+- [x] second tab with buffon's needles simulation
+- [ ] change bootstrap theme
