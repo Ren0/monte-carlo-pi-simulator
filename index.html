@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<!-- Define the module -->
+<!-- In AngularJS, a module is an object container for Controllers, Directives, Routes, Filers, etc. -->
+<!-- ng-app could have been named ng-module... -->
+<html ng-app="piEstimationModule">
+<head>
+	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+	<meta content="utf-8" http-equiv="encoding">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<link href="./css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<link href="./css/app.css" rel="stylesheet">
+	<link href="./img/favicon.ico" rel="icon" type="image/x-icon" />
+	<!--<link rel="shortcut icon" href="./img/favicon.ico">-->
+	
+	<!-- Vendor libs (jQuery: only used for Bootstrap functionality) -->
+	<script src="http://code.jquery.com/jquery.js"></script>
+	<script src="./js/angular.min.js"/></script>
+	<script src="./js/chart.js"/></script>
+	<script src="./js/highcharts.src.js"></script>
+	
+	<!-- UI lib -->
+	<script src="./js/bootstrap.min.js"></script>
+	
+	<!-- App libs -->
+	<script src="./app/app.js"></script> 
+	<script src="./app/controllers/DartBoardController.js"></script> 
+	<script src="./app/controllers/BuffonsNeedlesController.js"></script>
+	<script src="./app/controllers/MandelbrotSetController.js"></script>
+	<script src="./app/services/PiEstimationService.js"></script>
+	<script src="./app/services/DartBoardService.js"></script>
+	<script src="./app/services/BuffonsNeedlesService.js"></script>
+	<script src="./app/services/ChartService.js"></script>
+	<script src="./app/services/TimeTrackerService.js"></script>
+	<script src="./app/directives/highchart.js"></script>
+</head>
+<body>
+	
+	<!-- Navbar -->
+	<div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="#">Pi Estimation</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li><a href="#/dartBoard">Dart Board</a></li>
+              <li><a href="#/buffonsNeedles">Buffon's Needles</a></li>
+			  <li><a href="#/mandelbrotSet">Mandelbrot Set</a></li>
+            </ul>
+          </div>
+		  <div class="pull-right">
+			<!--<a href="#">Version {{version.message}}</a>-->
+		  </div>
+        </div>
+      </div>
+    </div>
+
+	<br/><br/><br/>
+		
+	<!-- Placeholder for Views -->
+	<!-- No need of ng-controller as it is binded behing the scenes using $routeProvider -->
+	<div ng-view>
+	</div>
+</body>
+</html>
