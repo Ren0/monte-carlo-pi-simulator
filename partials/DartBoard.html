@@ -2,7 +2,7 @@
 	<div ng-controller="DartBoardController">
 		<div class="row-fluid">
 			<div class="span4">
-					<form ng-submit="addPoints()" ng-init="nbPointsToAdd=100">
+					<form ng-submit="addDarts()" ng-init="nbPointsToAdd=100">
 						<input type="number" min="1" max="10000000" class="input-medium search-query" ng-model="nbPointsToAdd"/>
 						<br/><br/>
 						<input class="btn btn-info" type="submit" value="Throw {{nbPointsToAdd | number}} darts"/>
@@ -43,15 +43,15 @@
 				<tbody>
 					<tr>
 					  <td>Compute values</td>
-					  <td>{{calculateTime | number}} ms </td>
+					  <td>{{stepTimes[0] | number}} ms </td>
 					</tr>
 					<tr>
 					  <td>Draw points</td>
-					  <td>{{drawPointsTime | number}} ms</td>
+					  <td>{{stepTimes[1] | number}} ms</td>
 					</tr>
 					<tr>
 					  <td>Draw chart</td>
-					  <td>{{drawChartTime | number}} ms</td>
+					  <td>{{stepTimes[2] | number}} ms</td>
 					</tr>
 					<tr>
 					  <td><b>Total</b></td>
@@ -71,11 +71,8 @@
 				</canvas>
 			</div>
 			<div class="span6">
-				<!--<canvas id="chart" width="600" height="400">
-				</canvas>-->
 				<chart value='chart' type="area" height="400">
 				</chart>
-				<!--<highchart id="chart" series="chart.series" title="chart.title" options="chart.options"></highchart>-->
 			</div>
 		</div>
 	</div>

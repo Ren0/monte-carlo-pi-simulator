@@ -1,9 +1,8 @@
 // Create Controller
 // in AngularJS $scope is the ViewModel in the MVVM architecture
 // it is the glue between the view and the controller
-function DartBoardController($scope, $http, piEstimationService, dartBoardService, chartService) {
+function DartBoardController($scope, $http, piEstimationService, dartBoardService, chartService, timeTrackerService) {
 
-	
 	piEstimationService.reset();
 	dartBoardService.initDartBoard();
 
@@ -11,7 +10,6 @@ function DartBoardController($scope, $http, piEstimationService, dartBoardServic
 		piEstimationService.reset();
 		chartService.drawChart($scope, piEstimationService.getAllTrackedValue(), piEstimationService.getLabels(10));
 		dartBoardService.initDartBoard();
-		$scope.resetTimes(true);
 		$scope.resetComputations();
 	};	
 	
@@ -22,41 +20,27 @@ function DartBoardController($scope, $http, piEstimationService, dartBoardServic
 		$scope.piError = 0;
 	};
 	
-	$scope.resetTimes = function(resetTotalTime) {
-		if (resetTotalTime) $scope.totalTime = 0;
-		$scope.calculateTime = 0;
-		$scope.drawPointsTime = 0;
-		$scope.drawChartTime = 0;
-	};
-	
-	$scope.addPoints = function() {
-		$scope.resetTimes(false);
+	$scope.addDarts = function() {
+		timeTrackerService.resetTimes();
 		
-		var startTime = new Date().getTime();
-		
-		var stepTime = new Date().getTime();
 		piEstimationService.calculateNewPoints($scope.nbPointsToAdd);
 		this.updateComputations();
-		$scope.calculateTime = Date.now() - stepTime;
-		$scope.totalTime += $scope.calculateTime;
+		timeTrackerService.update();
 		
-		stepTime = new Date().getTime();
 		dartBoardService.drawNewPoints(piEstimationService.getPointsToAdd());
-		$scope.drawPointsTime = Date.now() - stepTime;
-		$scope.totalTime += $scope.drawPointsTime;
+		timeTrackerService.update();
 		
-		// now updated in the directive
-		//stepTime = new Date().getTime();
 		chartService.drawChart($scope,piEstimationService.getAllTrackedValue(), piEstimationService.getLabels(10));
-		//$scope.drawChartTime = Date.now() - stepTime;
+		// drawChartTime is updated in the directive
 		
-		$scope.totalTime = Date.now() - startTime;
+		$scope.stepTimes = timeTrackerService.getStepTimes();
+		$scope.totalTime = timeTrackerService.getTotalTime();
 	};
 	
 	$scope.updateComputations = function() {
 		$scope.numberPointsTotal = piEstimationService.getNumberOfPoints();
 		$scope.numberPointsInside = piEstimationService.getNumberOfPointsInside();
-		$scope.piEstimation = piEstimationService.calculatePi();
+		$scope.piEstimation = piEstimationService.calculatePi("darts");
 		$scope.piError = piEstimationService.calculatePiError();
 	};
 

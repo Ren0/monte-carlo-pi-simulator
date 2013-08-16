@@ -36,11 +36,11 @@ piEstimationModule.service('dartBoardService', function () {
 		context.stroke();
 	}
 
-	this.drawNewPoints = function(newPoints) {	
+	this.drawNewPoints = function(newPoints) {
 		context.beginPath();
 		for (i = 0; i < newPoints.length; i++) {
 			var x = newPoints[i]["x"];
-			var y = newPoints[i]["y"];;
+			var y = newPoints[i]["y"];
 			var xPos = (centerX - radius) + 2 * radius * x;
 			var yPos = 2 * radius * y;
 			context.fillRect(xPos, yPos, 1, 1);

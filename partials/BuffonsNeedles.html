@@ -1,4 +1,79 @@
-<div>
-	TODO
+<div class="container-fluid">
+	<div ng-controller="BuffonsNeedlesController">
+		<div class="row-fluid">
+			<div class="span4">
+					<form ng-submit="addNeedles()" ng-init="nbNeedlesToAdd=100">
+						<input type="number" min="1" max="10000000" class="input-medium search-query" ng-model="nbNeedlesToAdd"/>
+						<br/><br/>
+						<input class="btn btn-info" type="submit" value="Drop {{nbNeedlesToAdd | number}} needles"/>
+					</form>	
+					<form ng-submit="reset()">
+						<input class="btn" type="submit" value="Reset"/>
+					</form>								
+			</div>	
+			
+			<div class="span4">
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+						  <td>Number of hits</td>
+						  <td><span style="color:blue">{{numberPointsInside | number}}</span></td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+						  <td>Total needles</td>
+						  <td><span style="color:red">{{numberPointsTotal | number}}</span></td>
+						</tr>
+						<tr>
+						  <td>
+								Pi &#8776; (2 x <span style="color:red">{{numberPointsTotal | number}}</span>) / <span style="color:blue">{{numberPointsInside | number}}</span></td>
+						  <td>{{piEstimation | number}}</td>
+						</tr>
+						<tr>
+						  <td>Estimation error</td>
+						  <td>{{piError | number}} %</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>	
+			
+			<div class="span3 offset1">			
+			<table class="table table-condensed">
+				<tbody>
+					<tr>
+					  <td>Compute values</td>
+					  <td>{{stepTimes[0] | number}} ms </td>
+					</tr>
+					<tr>
+					  <td>Draw needles</td>
+					  <td>{{stepTimes[1] | number}} ms </td>
+					</tr>
+					<tr>
+					  <td>Draw chart</td>
+					  <td>{{stepTimes[2] | number}} ms </td>
+					</tr>
+					<tr>
+					  <td><b>Total</b></td>
+					  <td><b>{{totalTime | number}} ms</b></td>
+					</tr>
+				</tbody>
+			</table>
+			</div>		
+		</div>
 	
+
+		<br/>
+		<div class="row-fluid">
+			<div class="span6">
+				<canvas id="buffonsNeedles" width="600" height="400">
+					Your brower does not support HTML5
+				</canvas>
+			</div>
+			<div class="span6">
+				<chart value='chart' type="area" height="400">
+				</chart>
+			</div>
+		</div>
+	</div>
 </div>

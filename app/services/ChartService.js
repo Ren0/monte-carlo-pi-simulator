@@ -1,8 +1,6 @@
 piEstimationModule.service('chartService', function () {
 
 	this.drawChart = function($scope, tv, labels) {
-		console.log("Draw values: " + tv.length);
-	
 		var resultKey = [];
 		var resultValue = [];
 		var resultRef = [];
