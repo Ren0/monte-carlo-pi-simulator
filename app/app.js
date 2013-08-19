@@ -20,10 +20,10 @@ piEstimationModule.config(function ($routeProvider) {
 				controller: 'BuffonsNeedlesController',
 				templateUrl: 'partials/BuffonsNeedles.html'
 			})
-		.when('/mandelbrotSet',
-			{
-				controller: 'MandelbrotSetController',
-				templateUrl: 'partials/MandelbrotSet.html'
-			})	
+		//.when('/mandelbrotSet',
+			//{
+			//	controller: 'MandelbrotSetController',
+			//	templateUrl: 'partials/MandelbrotSet.html'
+			//})	
 		.otherwise({redirectTo: '/dartBoard'});
 });

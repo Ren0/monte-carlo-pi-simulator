@@ -8,7 +8,7 @@ function DartBoardController($scope, $http, piEstimationService, dartBoardServic
 
 	$scope.reset = function() {
 		piEstimationService.reset();
-		chartService.drawChart($scope, piEstimationService.getAllTrackedValue(), piEstimationService.getLabels(10));
+		$scope.chart = chartService.drawChart($scope, piEstimationService.getAllTrackedValue(), piEstimationService.getLabels(10));
 		dartBoardService.initDartBoard();
 		$scope.resetComputations();
 	};	
@@ -30,7 +30,7 @@ function DartBoardController($scope, $http, piEstimationService, dartBoardServic
 		dartBoardService.drawNewPoints(piEstimationService.getPointsToAdd());
 		timeTrackerService.update();
 		
-		chartService.drawChart($scope,piEstimationService.getAllTrackedValue(), piEstimationService.getLabels(10));
+		$scope.chart = chartService.drawChart($scope,piEstimationService.getAllTrackedValue(), piEstimationService.getLabels(10));
 		// drawChartTime is updated in the directive
 		
 		$scope.stepTimes = timeTrackerService.getStepTimes();
