@@ -2,12 +2,12 @@ Pi estimations
 ========================
 
 This small Javascript application illustrates the concept of Monte Carlo method used to calculate the value of Pi.
-* http://ren0.github.io/monte-carlo-pi-simulator/
+* http://www.olivettom.com/pisimulation
 
 It works with HTML5 canvas so make sure you don't use a retarded browser.
 To run it, simply extract it locally and open monte-carlo.html in your browser.
 
-<img src="http://imgur.com/s3l13Sx">
+<img src="http://imgur.com/s3l13Sx>"
 
 
 Monte Carlo method
@@ -27,6 +27,5 @@ Multiply the ratio by 4 to get an approximation of Pi value.
 Javascript application
 ------------------------
 
-The application is a Single Page Applications (SPA) and makes use of AngularJS library and Twitter Bootstrap.
-I recommend watching this great video for a quick overview of AngularJS:
-* http://weblogs.asp.net/dwahlin/archive/2013/04/12/video-tutorial-angularjs-fundamentals-in-60-ish-minutes.aspx
+The application is a Single Page Application (SPA) and makes use of AngularJS library and Twitter Bootstrap.
+
