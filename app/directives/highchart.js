@@ -21,7 +21,7 @@ angular.module('highchart.directive',[])
           width: attrs.width || null
         }
       };
-      
+
         //Update when charts data changes
         scope.$watch(function() { return scope.chartData; }, function(value) {
           if(!value) return;
@@ -33,9 +33,9 @@ angular.module('highchart.directive',[])
             var newSettings = {};
             $.extend(deepCopy, newSettings, chartsDefaults, scope.chartData);
             var chart = new Highcharts.Chart(newSettings);
-			
-			// update time 
-			timeTrackerService.update();
+
+			// update time
+			// timeTrackerService.update();
         }, true);
       }
     };
