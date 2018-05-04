@@ -19,13 +19,16 @@ function BuffonsNeedlesController($scope, $http, piEstimationService, buffonsNee
 	$scope.addNeedles = function() {
 		timeTrackerService.resetTimes();
 
+		timeTrackerService.newStep();
 		piEstimationService.calculateNewNeedles($scope.nbNeedlesToAdd);
 		this.updateComputations();
 		timeTrackerService.update();
 
+		timeTrackerService.newStep();
 		buffonsNeedlesService.drawNewNeedles(piEstimationService.getPointsToAdd());
 		timeTrackerService.update();
 
+		timeTrackerService.newStep();
 		$scope.chart = chartService.drawChart($scope,piEstimationService.getAllTrackedValue(), piEstimationService.getLabels(10));
 		timeTrackerService.update();
 

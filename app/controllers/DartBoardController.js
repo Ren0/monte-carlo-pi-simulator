@@ -23,13 +23,16 @@ function DartBoardController($scope, $http, piEstimationService, dartBoardServic
 	$scope.addDarts = function() {
 		timeTrackerService.resetTimes();
 
+		timeTrackerService.newStep();
 		piEstimationService.calculateNewPoints($scope.nbPointsToAdd);
 		this.updateComputations();
 		timeTrackerService.update();
 
+		timeTrackerService.newStep();
 		dartBoardService.drawNewPoints(piEstimationService.getPointsToAdd());
 		timeTrackerService.update();
 
+		timeTrackerService.newStep();
 		$scope.chart = chartService.drawChart($scope,piEstimationService.getAllTrackedValue(), piEstimationService.getLabels(10));
 		timeTrackerService.update();
 

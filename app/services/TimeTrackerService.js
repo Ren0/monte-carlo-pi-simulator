@@ -10,6 +10,10 @@ piEstimationModule.service('timeTrackerService', function () {
 		nbSteps = 0
 	}
 
+	this.newStep = function() {
+		startTime = new Date().getTime();
+	}
+
 	this.update = function() {
 		stepTimes[nbSteps] = new Date().getTime() - startTime;
 		nbSteps++;
